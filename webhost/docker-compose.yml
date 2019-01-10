@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  proxyserver:
+    image: httpd:latest
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./proxyserver/extra:/usr/local/apache2/conf/extra
+      - ./proxyserver/htdocs:/usr/local/apache2/htdocs
+      - ./proxyserver/httpd.conf:/usr/local/apache2/conf/httpd.conf
+    networks:
+      - localweb
+
+  website1:
+    image: httpd:latest
+    volumes:
+      - ./website1/htdocs:/usr/local/apache2/htdocs
+    networks:
+      - localweb
+
+networks:
+  localweb:
+    driver: bridge

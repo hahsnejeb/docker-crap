@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  website2:
+    image: httpd:latest
+    volumes:
+      - ./website2/htdocs:/usr/local/apache2/htdocs
+    networks:
+      - localweb
+networks:
+  localweb:
+    driver: bridge
